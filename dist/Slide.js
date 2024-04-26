@@ -113,7 +113,10 @@ export default class Slide {
         this.controls.appendChild(nextButton);
         this.controls.addEventListener('pointerdown', () => this.pause());
         document.addEventListener('pointerup', () => this.continue());
-        document.addEventListener('touchend', () => this.continue());
+        document.addEventListener('touchend', (event) => {
+            event.preventDefault();
+            this.continue();
+        });
         prevButton.addEventListener('pointerup', () => this.prev());
         nextButton.addEventListener('pointerup', () => this.next());
     }
