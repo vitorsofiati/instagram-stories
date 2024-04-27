@@ -96,9 +96,9 @@ export default class Slide {
   }
 
   next() {
-    // if (this.paused) return;
-    // const next = this.index + 1 < this.slides.length ? this.index + 1 : 0;
-    // this.show(next);
+    if (this.paused) return;
+    const next = this.index + 1 < this.slides.length ? this.index + 1 : 0;
+    this.show(next);
   }
 
   pause() {
