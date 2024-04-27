@@ -107,8 +107,8 @@ h1 {
   position: absolute;
   bottom: 20px;
   right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   border: none;
   background: url('./assets/sound-off.svg') center no-repeat;

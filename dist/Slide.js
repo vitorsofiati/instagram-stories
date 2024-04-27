@@ -78,15 +78,11 @@ export default class Slide {
         this.show(prev);
     }
     next() {
-        if (this.paused)
-            return;
-        const next = this.index + 1 < this.slides.length ? this.index + 1 : 0;
-        this.show(next);
     }
     pause() {
         document.body.classList.add('paused');
         this.pausedTimeout = new Timeout(() => {
-            this.visibleThumb(false);
+            this.visibleItems(false);
             this.timeout?.pause();
             this.paused = true;
             this.thumb?.classList.add('paused');
@@ -97,7 +93,7 @@ export default class Slide {
     }
     continue() {
         document.body.classList.remove('paused');
-        this.visibleThumb(true);
+        this.visibleItems(true);
         this.pausedTimeout?.clear();
         if (this.paused) {
             this.paused = false;
@@ -107,13 +103,17 @@ export default class Slide {
                 this.slide.play();
         }
     }
-    visibleThumb(state) {
+    visibleItems(state) {
         const thumbContainer = document.getElementById('slide-thumb');
-        if (thumbContainer) {
+        const soundButton = document.querySelector('.sound-button');
+        if (thumbContainer)
             state
                 ? (thumbContainer.style.opacity = '1')
                 : (thumbContainer.style.opacity = '0');
-        }
+        if (soundButton)
+            state
+                ? (soundButton.style.opacity = '1')
+                : (soundButton.style.opacity = '0');
     }
     addControls() {
         const prevButton = document.createElement('button');
