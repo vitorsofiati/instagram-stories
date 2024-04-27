@@ -46,10 +46,12 @@ export default class Slide {
         this.slides.forEach((slide) => this.hide(slide));
         this.slide.classList.add('active');
         if (this.slide instanceof HTMLVideoElement) {
+            this.addSoundButton(this.slide);
             this.autovideo(this.slide);
         }
         else {
             this.auto(this.time);
+            document.querySelector('.sound-button')?.remove();
         }
     }
     autovideo(video) {
@@ -107,6 +109,8 @@ export default class Slide {
     addControls() {
         const prevButton = document.createElement('button');
         const nextButton = document.createElement('button');
+        prevButton.classList.add('btn-controls');
+        nextButton.classList.add('btn-controls');
         prevButton.innerText = 'Slide Anterior';
         nextButton.innerText = 'Próximo Slide';
         this.controls.appendChild(prevButton);
@@ -128,6 +132,16 @@ export default class Slide {
         }
         this.controls.appendChild(thumbContainer);
         this.thumbItems = Array.from(document.querySelectorAll('.thumb-item'));
+    }
+    addSoundButton(video) {
+        const soundButton = document.createElement('button');
+        soundButton.classList.add('sound-button');
+        this.controls.appendChild(soundButton);
+        video;
+        soundButton.addEventListener('pointerdown', () => {
+            soundButton.classList.toggle('muted');
+            video.muted = !video.muted;
+        });
     }
     init() {
         this.addControls();
