@@ -86,6 +86,7 @@ export default class Slide {
     pause() {
         document.body.classList.add('paused');
         this.pausedTimeout = new Timeout(() => {
+            this.visibleThumb(false);
             this.timeout?.pause();
             this.paused = true;
             this.thumb?.classList.add('paused');
@@ -96,14 +97,22 @@ export default class Slide {
     }
     continue() {
         document.body.classList.remove('paused');
+        this.visibleThumb(true);
         this.pausedTimeout?.clear();
         if (this.paused) {
             this.paused = false;
             this.timeout?.continue();
             this.thumb?.classList.remove('paused');
-            if (this.slide instanceof HTMLVideoElement) {
+            if (this.slide instanceof HTMLVideoElement)
                 this.slide.play();
-            }
+        }
+    }
+    visibleThumb(state) {
+        const thumbContainer = document.getElementById('slide-thumb');
+        if (thumbContainer) {
+            state
+                ? (thumbContainer.style.opacity = '1')
+                : (thumbContainer.style.opacity = '0');
         }
     }
     addControls() {
