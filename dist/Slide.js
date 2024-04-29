@@ -78,6 +78,10 @@ export default class Slide {
         this.show(prev);
     }
     next() {
+        if (this.paused)
+            return;
+        const next = this.index + 1 < this.slides.length ? this.index + 1 : 0;
+        this.show(next);
     }
     pause() {
         document.body.classList.add('paused');

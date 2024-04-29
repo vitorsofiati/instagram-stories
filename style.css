@@ -1,6 +1,8 @@
 body {
   margin: 20px;
   font-family: sans-serif;
+  background: linear-gradient(to right, #000, #06010e, #000);
+  color: #ddd;
 }
 
 body.paused {
